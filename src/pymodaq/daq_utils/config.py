@@ -208,7 +208,8 @@ class TreeFromToml(QObject):
         res = self.dialog.exec()
 
         if res == self.dialog.Accepted:
-            with open(self.config_path, 'w') as f:
+            config_path = self.settings.child('config_path').value()
+            with open(config_path, 'w') as f:
                 config = self.param_to_dict(self.settings)
                 config.pop('config_path')
                 toml.dump(config, f)
